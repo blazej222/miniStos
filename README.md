@@ -5,7 +5,7 @@ This app compares expected test result from stos to your program's result. If no
 
 Syntax:
 
-`ministos.exe [file1] [file2]`, example `ministos.exe tests\12.out myOutputs\12.out`
+`ministos.exe [testFromEnauczanie] [yourOutput]`, example `ministos.exe tests\12.out myOutputs\12.out`
 
 # Generating output from your project
 
