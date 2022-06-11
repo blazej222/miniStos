@@ -4,6 +4,7 @@ bin/outputs/*
 bin/tests/*
 !**/.gitkeep
 **/*.pdb
+bin/config.txt
 # Prerequisites
 *.d
 

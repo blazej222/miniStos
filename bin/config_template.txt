@@ -1,4 +1,4 @@
-F:\programowanie\testenv\AISD_project_3.exe # This is the path to your project binary (you upload this file's source code to STOS). It cannot contain spces and can contain only ASCII characters.
+F:\programowanie\testenv\AISD3.exe # This is the path to your project binary (you upload this file's source code to STOS). It cannot contain spces and can contain only ASCII characters.
 F:\programowanie\testenv\tests # Path to directory containing STOS test files (.in and .out files). It cannot contain spces and can contain only ASCII characters.
 F:\programowanie\testenv\outputs # Directory to which outputs of your project should be dumped and compared against STOS results. It cannot contain spces and can contain only ASCII characters.
 23 # Number of tests to check. MiniStos will iterate from 0.in to this_number.in, in this case 23 tests will be checked
