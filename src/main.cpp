@@ -8,6 +8,7 @@
 #define MICROSECONDS_DIVIDER 1000000
 #ifdef WINDOWS
 #include <Windows.h>
+#include <Psapi.h>
 #endif
 using namespace std;
 
@@ -82,10 +83,10 @@ ProcessData startup(LPCSTR lpApplicationName,string filein,string fileout)
 }
 
 void printHeader() {
-	cout << "TEST_NUMBER      RESULT      MISMATCH_IN_LINE      EXECUTION_TIME[s]" <<endl;
+	cout << "TEST_NUMBER      RESULT      MISMATCH_IN_LINE      EXECUTION_TIME[s]      MEMORY_USAGE[KB][INACCURATE!!!]" <<endl;
  }
 
-void printResult(uint64_t amount_of_sec_chrono, uint64_t amount_of_usec_chrono,int result,int number) {
+void printResult(uint64_t amount_of_sec_chrono, uint64_t amount_of_usec_chrono,int result,int number,SIZE_T mem) {
 	cout << left << setfill(' ') << setw(16) << number;
 	if (result == 0) {
 		cout << green << "[  OK  ]     " << setfill(' ') << setw(22) <<"-" << white;
@@ -101,7 +102,12 @@ void printResult(uint64_t amount_of_sec_chrono, uint64_t amount_of_usec_chrono,i
 	cout
 		<< amount_of_sec_chrono
 		<< "."
-		<< setfill('0') << setw(6) << amount_of_usec_chrono <<endl;
+		<< setfill('0') << setw(6) << amount_of_usec_chrono;
+	cout
+		<< "               "
+		<<setfill(' ')
+		<<setw(6)
+		<<mem <<endl;
 }
 
 int main(int argc,char ** argv)
@@ -161,7 +167,13 @@ int main(int argc,char ** argv)
 		string filein_compare = filein;
 		filein_compare.replace(pos, 3, ".out");
 
-		printResult(amount_of_sec_chrono, amount_of_usec_chrono, compareFile(filein_compare, fileout),i+1);
+		//memory info
+		PROCESS_MEMORY_COUNTERS pmc;
+		ZeroMemory(&pmc,sizeof(pmc));
+		pmc.cb = sizeof(pmc);
+		GetProcessMemoryInfo(pd.pi.hProcess,&pmc,sizeof(pmc));
+		SIZE_T mem = pmc.PeakWorkingSetSize/1024; //FIXME: Readings inaccurate compared to those displayed in STOS
+		printResult(amount_of_sec_chrono, amount_of_usec_chrono, compareFile(filein_compare, fileout),i+1,mem);
 
 		// Close handles. 
 		CloseHandle(pd.pi.hProcess);
