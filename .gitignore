@@ -1,5 +1,9 @@
 build
 .vscode
+bin/outputs/*
+bin/tests/*
+!**/.gitkeep
+**/*.pdb
 # Prerequisites
 *.d
 
