@@ -1,3 +1,9 @@
+/*
+NOTE: The time measured by this app can differ from the time shown on STOS.
+This feature is currently being tested.
+Same goes for memory measuring.
+*/
+
 #include <iostream>
 #include <fstream>
 #include <string>
