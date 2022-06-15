@@ -1,3 +1,8 @@
+/*
+NOTE: The time measured by this app can differ from the time shown on STOS.
+This feature is currently being tested, but as it may be very useful it's provided in stable branch also.
+*/
+
 #include <iostream>
 #include <fstream>
 #include <string>
