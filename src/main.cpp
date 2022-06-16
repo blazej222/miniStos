@@ -92,7 +92,14 @@ void printHeader() {
 	cout << "TEST_NUMBER      RESULT      MISMATCH_IN_LINE      EXECUTION_TIME[s]      MEMORY_USAGE[KB][INACCURATE!!!]" <<endl;
  }
 
-void printResult(uint64_t amount_of_sec_chrono, uint64_t amount_of_usec_chrono,int result,int number,SIZE_T mem) {
+void printResult(uint64_t amount_of_sec_chrono, uint64_t amount_of_usec_chrono,int result,int number,SIZE_T memory) {
+	//convert windows memory usage to memory usage shown on STOS
+	const double a_multiplier = 0.426528;
+	const double b_additive = -2134.36;
+	double mem = (memory*a_multiplier)+b_additive; //formula might be different on different PCs - deviation seems to be a linear function on my PC, but more testing is needed
+	/*
+	Formula above assumes the project binary is compiled in 32bit debug mode - it seems STOS compiles file this way.
+	*/
 	cout << left << setfill(' ') << setw(16) << number;
 	if (result == 0) {
 		cout << green << "[  OK  ]     " << setfill(' ') << setw(22) <<"-" << white;
@@ -111,8 +118,8 @@ void printResult(uint64_t amount_of_sec_chrono, uint64_t amount_of_usec_chrono,i
 		<< setfill('0') << setw(6) << amount_of_usec_chrono;
 	cout
 		<< "               "
-		<<setfill(' ')
-		<<setw(6)
+		//<<setfill(' ')
+		//<<setw(6)
 		<<mem <<endl;
 }
 
